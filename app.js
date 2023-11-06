@@ -9,6 +9,7 @@ const cors = require('cors');
 const app = express();
 const { checkDBConnect, sequelize } = require('./connect')
 const blessing = require('./routes/blessing');
+const service = require('./src/service')
 app.use(cors());
 
 app.set('view engine', 'ejs');
@@ -25,7 +26,7 @@ app.get('/', (req, res) => {
     return;
 });
 app.use('/blessing', multipartMiddleware, blessing);
-
+app.use('/service', service)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));
@@ -42,7 +43,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
-//app.listen(process.env.PORT);
+
 
 module.exports = app;
   
