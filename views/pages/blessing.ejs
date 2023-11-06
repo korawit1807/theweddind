@@ -2,13 +2,49 @@
 
 <!-- script -->
 <script>
-
+const auth = "MjUxMTIwMjNwb21kb21ldGhld2VkZGluZw==";
 function btnSaved() {
     const name = $("#name").val()
     const blessing = $("#name").val()
-    const image = $("#file").val()
-    console.log(image)
+    const image = $("#output").attr('src')
+    if(!(name && blessing)){
+       //ฝาก ADD ALERT 
+        console.log("Require Field Name , Blessing")
+        return
+    }
+    const data = {
+        name: name,
+        blessing: blessing,
+        image: image
+    }
+    $.ajax({
+        type: "POST",
+        url: "/service/api/v1/blessing/create",
+        headers: {
+            authorization: "Bearer " + auth
+        },
+        data: data,
+        
+        success: function(data){
+            //ฝาก ADD ALERT *** เอาชื่อที่เอากรอกมาแสดง
+            alert(data)
+        },
+        failure: function(errMsg) {
+            //ฝาก ADD ALERT
+            alert(errMsg);
+        }
+  });
 }
+
+function loadFile (event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+      const output = document.getElementById('output');
+      output.src = reader.result;
+    }    
+    reader.readAsDataURL(event.target.files[0]);
+    $("#imgDiv").attr("hidden", false);
+  };
 
 </script>
 
@@ -34,8 +70,11 @@ function btnSaved() {
             <div class="text">
                 <span>แนบสลิป (optional)</span>
             </div>
-            <input type="file" id="file" name="slipPayment">
+            <input type="file" id="file" name="slipPayment"  accept="image/*" onchange="loadFile(event)">
         </label>
+        <div id="imgDiv" hidden class="inputGroup  justify-content-center">'
+            <img width="100%" height="300px" id="output"/>
+        </div>
     </form>
 </div>
 <div class="fixed-bottom p-2 mb-2">

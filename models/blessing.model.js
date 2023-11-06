@@ -12,7 +12,7 @@ const blessing = sequelize.define('blessing', {
         allowNull: false,
     },
     blessing: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
     },
     date: {
@@ -30,7 +30,7 @@ const blessing = sequelize.define('blessing', {
         }
     },
     image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         defaultValue: null
     }
 }, {
