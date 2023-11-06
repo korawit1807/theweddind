@@ -24,10 +24,39 @@ function btnSaved() {
             authorization: "Bearer " + auth
         },
         data: data,
-        
+        beforeSend: function(){
+            Swal.fire({
+                title: "waiting",
+                showConfirmButton: false,
+                html: `
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    <div class="spinner-grow text-primary" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    <div class="spinner-grow text-success" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    <div class="spinner-grow text-info" role="status">
+                        <span class="visually-hidden"></span>
+                    </div>
+                    `
+                });
+        },
         success: function(data){
-            //ฝาก ADD ALERT *** เอาชื่อที่เอากรอกมาแสดง
-            alert(data)
+            Swal.fire({
+                title: "Thank you",
+                text: `ขอบคณ คุณ ${data?.data?.name} ที่มอบคำอวยพร`,
+                icon: "success",
+                timer: 3000
+            });
         },
         failure: function(errMsg) {
             //ฝาก ADD ALERT
