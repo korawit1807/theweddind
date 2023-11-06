@@ -18,6 +18,7 @@ module.exports = class createBlessing {
             await blessingModel.create(data).then(() => {
                 return res.status(200).json({ data: data, date: data?.date })
             }).catch((error) => {
+                //
                 console.error('[CREATE] blessing error: ', error)
                 return res.status(400).json({ msg: error})
             })
