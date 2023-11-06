@@ -8,7 +8,7 @@ module.exports = class createBlessing {
     async create(req, res) {
         try {
             const body = req.body
-            console.log(body)
+
             const data = {
                 name:  (body?.name && body?.name != '') ? body?.name : `testName_${moment(this.date).format("YYYY-MM-DD hh:mm:ss")}` ,
                 blessing: body?.blessing ?? null,
