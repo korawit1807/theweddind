@@ -1,0 +1,23 @@
+config:
+  # This is a test server run by team Artillery
+  # It's designed to be highly scalable
+  target: https://pomdomethewedding.onrender.com
+  phases:
+    - duration: 60
+      arrivalRate: 20
+      maxVusers: 100
+  http:
+    defaults:
+      headers:
+        Content-Type: "application/json"
+        Authorization: "Bearer MjUxMTIwMjNwb21kb21ldGhld2VkZGluZw=="
+  plugins:
+    expect: {}
+
+scenarios:
+  - flow:
+      # - log: 'Init web chat'
+      - get:
+          url: "/blessing"
+          expect:
+            - statusCode: 200
