@@ -1,5 +1,6 @@
 const moment = require("moment")
 const { blessingModel } = require('../../models')
+const {lineNoti} = require('../linenoti')
 const { error } = require("jquery")
 module.exports = class createBlessing {
     constructor() {
@@ -16,7 +17,9 @@ module.exports = class createBlessing {
                 date: moment(this.date).format("YYYY-MM-DD")
             }
             await blessingModel.create(data).then(() => {
-                return res.status(200).json({ data: data, date: data?.date })
+                res.status(200).json({ data: data, date: data?.date })
+                lineNoti(data)
+                return
             }).catch((error) => {
                 //
                 console.error('[CREATE] blessing error: ', error)
