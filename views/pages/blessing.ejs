@@ -53,14 +53,24 @@ function btnSaved() {
         success: function(data){
             Swal.fire({
                 title: "Thank you",
-                text: `ขอบคณ คุณ ${data?.data?.name} ที่มอบคำอวยพร`,
+                text: `ขอบคณ คุณ "${data?.data?.name}" ที่มอบคำอวยพร`,
                 icon: "success",
-                timer: 3000
-            });
+                timer: 3000,
+                showConfirmButton: false,
+            }).then(() => {
+                window.location.replace("/")
+            })
         },
         failure: function(errMsg) {
-            //ฝาก ADD ALERT
-            alert(errMsg);
+            Swal.fire({
+                title: "something went wrong!",
+                text: `ผิดพลาดกรุณาลองใหม่`,
+                icon: "warning",
+                timer: 2000,
+                showConfirmButton: false,
+            }).then(() => {
+                window.location.replace("/")
+            })
         }
   });
 }
