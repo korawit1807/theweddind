@@ -4,19 +4,24 @@
 <script>
 const auth = "MjUxMTIwMjNwb21kb21ldGhld2VkZGluZw==";
 function btnSaved() {
-    const name = $("#name").val()
-    const blessing = $("#blessing").val()
-    const image = $("#output").attr('src')
-    if(!(name && blessing)){
-       //ฝาก ADD ALERT 
-        console.log("Require Field Name , Blessing")
-        return
-    }
     const data = {
-        name: name,
-        blessing: blessing,
-        image: image
+        name: $("#name").val(),
+        blessing: $("#blessing").val(),
+        image: $("#output").attr('src')
     }
+    if(!(data?.name && data?.blessing)){
+       return Swal.fire({
+            title: "warning",
+            text: `กรุณาระบุชื่อ และ ข้อความอวยพร`,
+            icon: "warning",
+            timer: 2000,
+            showConfirmButton: false,
+        }).then(() => {
+            $("#name").focus()
+            $("#blessing").focus()
+        })
+    }
+   
     $.ajax({
         type: "POST",
         url: "/service/api/v1/blessing/create",
@@ -69,7 +74,7 @@ function btnSaved() {
                 timer: 2000,
                 showConfirmButton: false,
             }).then(() => {
-                window.location.replace("/")
+                window.location.reload()
             })
         }
   });
@@ -80,7 +85,7 @@ function loadFile (event) {
     reader.onload = function(){
       const output = document.getElementById('output');
       output.src = reader.result;
-    }    
+    }
     reader.readAsDataURL(event.target.files[0]);
     $("#imgDiv").attr("hidden", false);
   };
