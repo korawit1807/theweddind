@@ -116,22 +116,22 @@ function loadFile (event) {
             </div>
             <input type="file" id="file" name="slipPayment"  accept="image/*" onchange="loadFile(event)">
         </label>
-
+        <div class=" p-2  mt-2 mb-2">
+            <button type="button" class="btn btn-cus-blue btn-lg btn-block shadow-lg" onclick="btnSaved()">
+                <label class="mb-0">
+                    <i class="fa-solid fa-gift"></i> ส่งคำอวยพร
+                </label>
+            </button>
+            <button type="button" class="btn btn-lg btn-block" onclick="window.location.href=`/`;">
+                <label class="mb-0 text-cus-blue">
+                    <i class="fa-solid fa-backward"></i> ย้อนกลับ
+                </label>
+            </button>
+        </div>
         <div id="imgDiv"  class="inputGroup row justify-content-center">'
             <img width="60%" height="60%" id="output" src="/images/QR.jpg"/>
         </div>
     </form>
 </div>
-<div class="fixed-bottom p-2 mb-2">
-    <button type="button" class="btn btn-cus-blue btn-lg btn-block shadow-lg" onclick="btnSaved()">
-        <label class="mb-0">
-            <i class="fa-solid fa-gift"></i> ส่งคำอวยพร
-        </label>
-    </button>
-    <button type="button" class="btn btn-lg btn-block" onclick="window.location.href=`/`;">
-        <label class="mb-0 text-cus-blue">
-            <i class="fa-solid fa-backward"></i> ย้อนกลับ
-        </label>
-    </button>
-</div>
+
 <%- include('../layout/footer'); %>
